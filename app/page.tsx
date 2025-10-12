@@ -1,41 +1,21 @@
 "use client"
 
-// v1.0.1 - Cache refresh
-
-import type React from "react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Search, Check } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function HomePage() {
   const logoRef = useRef<HTMLDivElement>(null)
-  const sliderRef = useRef<HTMLDivElement>(null)
   const solutionsRef = useRef<HTMLDivElement>(null)
   const partnersRef = useRef<HTMLDivElement>(null)
   const supportRef = useRef<HTMLDivElement>(null)
-
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const slides = [
-    {
-      title: "Transform Your Business",
-      subtitle: "Innovative solutions for modern enterprises",
-      image: "/modern-business-transformation.jpg",
-    },
-    {
-      title: "Drive Innovation",
-      subtitle: "Cutting-edge technology for competitive advantage",
-      image: "/innovation-technology.jpg",
-    },
-    {
-      title: "Scale with Confidence",
-      subtitle: "Reliable platforms for sustainable growth",
-      image: "/business-growth-scaling.jpg",
-    },
-  ]
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,17 +26,17 @@ export default function HomePage() {
       )
 
       gsap.fromTo(
-        ".slider-content",
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.5, ease: "power3.out" },
+        ".hero-content",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: "power3.out" },
       )
 
       gsap.fromTo(
         ".solution-card",
-        { opacity: 0, x: -30 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 0.6,
           stagger: 0.1,
           ease: "power3.out",
@@ -69,10 +49,10 @@ export default function HomePage() {
 
       gsap.fromTo(
         ".partner-card",
-        { opacity: 0, x: -30 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 0.6,
           stagger: 0.1,
           ease: "power3.out",
@@ -85,10 +65,10 @@ export default function HomePage() {
 
       gsap.fromTo(
         ".support-card",
-        { opacity: 0, x: -30 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 0.6,
           stagger: 0.1,
           ease: "power3.out",
@@ -103,293 +83,413 @@ export default function HomePage() {
     return () => ctx.revert()
   }, [])
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [slides.length])
+  const solutions = [
+    {
+      id: "NivPAP",
+      title: "NivPAP",
+      description: "production: packaging that converts.",
+      image: "/Pap.jpg",
+    },
+    {
+      id: "NivMASS",
+      title: "NivMASS",
+      description: "Performance marketing & influencer funnels that scale revenue.",
+      image: "/Mass.jpg",
+    },
+    {
+      id: "NivITHUB",
+      title: "NivITHUB",
+      description: "Integrations, dashboards & ERP + AI workflows to automate ops.",
+      image: "/VRM.jpg",
+    },
+  ]
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+  const partners = [
+    {
+      id: "NivRAW",
+      title: "NivRAW",
+      description: "Verified suppliers & SKU catalogs by industry segment.",
+      image: "/RAW.jpg",
+    },
+    {
+      id: "NivVRM",
+      title: "NivVRM",
+      description: "Visual workflows + AI agents for vendor & customer comms.",
+      image: "/LoJISTICK.jpg",
+    },
+    {
+      id: "NivLojisticks",
+      title: "NivLojisticks",
+      description: "Hub-spoke network + API aggregator for fast delivery.",
+      image: "/IT.jpg",
+    },
+  ]
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
+  const support = [
+    {
+      id: "crm",
+      title: "CRM",
+      description: "Customer Relationship Management - Advanced CRM solutions",
+      image: "/customer-relationship-management-crm.jpg",
+    },
+    {
+      id: "admin",
+      title: "Admin",
+      description: "Administrative Services - Comprehensive administrative support",
+      image: "/administrative-services-management.jpg",
+    },
+    {
+      id: "legal",
+      title: "Legal",
+      description: "Legal & Compliance - Expert legal guidance and compliance",
+      image: "/legal-compliance-services.jpg",
+    },
+  ]
 
   return (
-    <div className="min-h-screen bg-black">
-      <div ref={logoRef} className="py-8">
-        <img src="/logo.png" alt="NIV BRM Logo" className="h-12 w-auto mx-auto" />
-      </div>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <header className="py-8 flex justify-center">
+        <div ref={logoRef}>
+  <Image
+    src="/logo.png"        // ← your logo file (place it in /public)
+    alt="NIV BRM Logo"
+    width={150}            // adjust as needed
+    height={40}            // adjust as needed
+    priority               // improves loading performance
+    className="object-contain"
+  />
+</div>
+      </header>
 
-      <section ref={sliderRef} className="relative h-[600px] overflow-hidden">
-        <div className="relative w-full h-full">
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <div
-                className="w-full h-full bg-cover bg-center relative"
-                style={{ backgroundImage: `url(${slide.image})` }}
-              >
-                <div className="absolute inset-0 bg-black/40" />
-                <div className="slider-content absolute inset-0 flex items-center justify-center text-center text-white">
-                  <div className="max-w-4xl px-6">
-                    <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-balance">{slide.title}</h1>
-                    <p className="text-xl lg:text-2xl mb-8 text-pretty">{slide.subtitle}</p>
-                    <Button size="lg" className="text-lg px-8 py-6 bg-white text-black hover:bg-gray-200">
-                      Learn More
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <section className="min-h-[60vh] flex flex-col items-center justify-center px-6">
+      <div className="hero-content w-full max-w-3xl text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-8">
+          How can we help you today?
+        </h1>
 
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentSlide ? "bg-white" : "bg-white/50"
-              }`}
+        {/* Search Bar */}
+        <div className="relative">
+          <div className="flex items-center gap-3 bg-[#2f2f2f] rounded-full px-6 py-4 hover:bg-[#3f3f3f] transition-colors">
+            <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+            <Input
+              type="text"
+              placeholder="Ask anything"
+              className="flex-1 bg-transparent border-none text-white placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
             />
+          </div>
+        </div>
+
+        {/* Buttons BELOW the search bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+          {/* Explore Solutions Button */}
+          <button className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors">
+            Explore Solutions
+          </button>
+
+          {/* Start AI Assistant Button */}
+          <button className="px-6 py-3 bg-[#2f2f2f] text-white font-medium rounded-full hover:bg-[#3f3f3f] transition-colors border border-gray-700">
+            Start AI Assistant
+          </button>
+        </div>
+      </div>
+    </section>
+      <section id="solutions" ref={solutionsRef} className="py-16 px-4 md:px-12">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Solutions</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {solutions.map((solution) => (
+            <Link key={solution.id} href={`/learn-more/${solution.id}`}>
+              <div className="solution-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+                <img
+                  src={solution.image || "/placeholder.svg"}
+                  alt={solution.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">{solution.title}</h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">{solution.description}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section id="solutions" ref={solutionsRef} className="py-12 px-4 md:px-12">
-        <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Solutions</h2>
+      <section id="partners" ref={partnersRef} className="py-16 px-4 md:px-12">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Partners</h2>
         </div>
-        <div className="relative">
-          <div
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            <div className="solution-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/BUSINESS SOLUTIONS.jpg" alt="RAP" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">RAP</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Resource Allocation Platform - Optimize your resource management
-                </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {partners.map((partner) => (
+            <Link key={partner.id} href={`/learn-more/${partner.id}`}>
+              <div className="partner-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+                <img
+                  src={partner.image || "/placeholder.svg"}
+                  alt={partner.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">{partner.title}</h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">{partner.description}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
               </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="solution-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/IT.jpg" alt="BAT" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">BAT</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Business Analytics Tools - Advanced analytics for data-driven decisions
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="solution-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/LoJISTICK.jpg" alt="Prof" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Prof</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Professional Services - Expert consulting and implementation
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="solution-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/Mass.jpg" alt="More Solutions" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">More Solutions</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Discover additional solutions tailored to your needs
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section id="partners" ref={partnersRef} className="py-12 px-4 md:px-12">
-        <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Partners</h2>
+      <section id="support" ref={supportRef} className="py-16 px-4 md:px-12">
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Support</h2>
         </div>
-        <div className="relative">
-          <div
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            <div className="partner-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/Pap.jpg" alt="KRM" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">KRM</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Knowledge Resource Management - Comprehensive knowledge solutions
-                </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {support.map((item) => (
+            <Link key={item.id} href={`/learn-more/${item.id}`}>
+              <div className="support-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+                <img src={item.image || "/placeholder.svg"} alt={item.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-300 leading-relaxed">{item.description}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
               </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="partner-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/RAW.jpg" alt="RAW" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">RAW</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Resource Allocation Workflow - Streamlined workflow management
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="partner-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/VRM.jpg" alt="Logistics" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Logistics</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Supply Chain & Logistics - End-to-end logistics solutions
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="partner-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/BUSINESS SOLUTIONS .jpg" alt="More Partners" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">More Partners</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">Explore our extensive partner network</p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section id="support" ref={supportRef} className="py-12 px-4 md:px-12">
-        <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Support</h2>
-        </div>
-        <div className="relative">
-          <div
-            className="flex gap-4 overflow-x-auto scrollbar-hide pb-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            <div className="support-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/IT.jpg" alt="CRM" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">CRM</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Customer Relationship Management - Advanced CRM solutions
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="support-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/LoJISTICK.jpg" alt="Admin" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Admin</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Administrative Services - Comprehensive administrative support
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="support-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/Mass.jpg" alt="Legal" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Legal</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  Legal & Compliance - Expert legal guidance and compliance
-                </p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
-            <div className="support-card flex-shrink-0 w-[300px] md:w-[400px] h-[225px] md:h-[300px] relative rounded-md overflow-hidden group/card cursor-pointer">
-              <img src="/Pap.jpg" alt="More Support" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">More Support</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">Discover additional support services available</p>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover/card:w-full transition-all duration-300"></div>
-            </div>
+      <section className="py-20 px-4 md:px-12 bg-black">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Choose Your Perfect Package</h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              Transparent pricing with no hidden fees. Select the package that best fits your business needs.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="py-16 border-t border-gray-800 mt-12">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <img src="/logo.png" alt="NIV BRM Logo" className="h-12 w-auto mb-4" />
-              <p className="text-gray-400 leading-relaxed max-w-md">
-                Empowering businesses with innovative solutions and comprehensive support services for sustainable
-                growth.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Solutions</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    RAP
-                  </a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Starter Package */}
+            <div className="bg-[#1a1a1a] border-2 border-gray-800 rounded-2xl p-8 hover:shadow-xl hover:shadow-red-900/20 transition-all">
+              <h3 className="text-2xl font-bold text-white mb-4">Starter</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-red-600">$999</span>
+                <span className="text-gray-400">/one-time</span>
+              </div>
+              <p className="text-gray-400 mb-8">Perfect for small businesses getting started online</p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">5-page responsive website</span>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    BAT
-                  </a>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Basic SEO optimization</span>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Prof
-                  </a>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Contact form integration</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Mobile-friendly design</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">3 months support</span>
                 </li>
               </ul>
+              <Button className="w-full bg-transparent text-white border-2 border-gray-700 hover:bg-red-600 hover:border-red-600 transition-colors">
+                Get Started →
+              </Button>
             </div>
-            <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    About
-                  </a>
+
+            {/* Professional Package - Most Popular */}
+            <div className="bg-[#1a1a1a] border-2 border-red-600 rounded-2xl p-8 relative hover:shadow-2xl hover:shadow-red-900/30 transition-all">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-1 rounded-full text-sm font-semibold">
+                Most Popular
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">Professional</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-red-600">$2,499</span>
+                <span className="text-gray-400">/one-time</span>
+              </div>
+              <p className="text-gray-400 mb-8">Comprehensive solution for growing businesses</p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">10-page custom website</span>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Careers
-                  </a>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Advanced SEO & analytics</span>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Contact
-                  </a>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">E-commerce integration</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">CMS integration</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">6 months support</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Performance optimization</span>
                 </li>
               </ul>
+              <Button className="w-full bg-red-600 text-white hover:bg-red-700 transition-colors">Get Started →</Button>
+            </div>
+
+            {/* Enterprise Package */}
+            <div className="bg-[#1a1a1a] border-2 border-gray-800 rounded-2xl p-8 hover:shadow-xl hover:shadow-red-900/20 transition-all">
+              <h3 className="text-2xl font-bold text-white mb-4">Enterprise</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-red-600">Custom</span>
+              </div>
+              <p className="text-gray-400 mb-8">Tailored solutions for large organizations</p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Unlimited pages</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Custom functionality</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Advanced security</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">API integrations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">12 months support</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Dedicated project manager</span>
+                </li>
+              </ul>
+              <Button className="w-full bg-transparent text-white border-2 border-gray-700 hover:bg-red-600 hover:border-red-600 transition-colors">
+                Get Quote →
+              </Button>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 NIV BRM. All rights reserved.</p>
+
+          <div className="text-center mt-12">
+            <Button
+              variant="outline"
+              className="border-2 border-gray-700 text-white hover:bg-red-600 hover:border-red-600 bg-transparent"
+            >
+              View All Packages
+            </Button>
           </div>
         </div>
-      </footer>
+      </section>
+
+       <footer className="py-16 border-t border-gray-800 bg-black">
+      <div className="container mx-auto px-6">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          {/* Logo / Brand */}
+          <div>
+            <div ref={logoRef}>
+  <Image
+    src="/logo.png"        // ← your logo file (place it in /public)
+    alt="NIV BRM Logo"
+    width={70}            // adjust as needed
+    height={10}            // adjust as needed
+    priority               // improves loading performance
+    className="object-contain"
+  />
+</div>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Empowering businesses with intelligent solutions and trusted partnerships.
+            </p>
+          </div>
+
+          {/* Solutions */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-4">Solutions</h4>
+            <ul className="space-y-3 text-gray-400">
+              {solutions?.map((solution: any) => (
+                <li key={solution.id}>
+                  <Link
+                    href={`/learn-more/${solution.id}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {solution.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Partners */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-4">Partners</h4>
+            <ul className="space-y-3 text-gray-400">
+              {partners?.map((partner: any) => (
+                <li key={partner.id}>
+                  <Link
+                    href={`/learn-more/${partner.id}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {partner.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h4 className="text-lg font-semibold text-white mb-4">Support</h4>
+            <ul className="space-y-3 text-gray-400">
+              {support?.map((item: any) => (
+                <li key={item.id}>
+                  <Link
+                    href={`/learn-more/${item.id}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm">
+          <p>&copy; {new Date().getFullYear()} NIV BRM. All rights reserved.</p>
+
+          <div className="flex items-center gap-6 mt-4 md:mt-0">
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/contact" className="hover:text-white transition-colors">
+              Contact
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
     </div>
   )
 }
