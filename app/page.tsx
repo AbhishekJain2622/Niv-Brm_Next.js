@@ -83,26 +83,30 @@ export default function HomePage() {
     return () => ctx.revert()
   }, [])
 
-  const solutions = [
-    {
-      id: "NivPAP",
-      title: "NivPAP",
-      description: "production: packaging that converts.",
-      image: "/Pap.jpg",
-    },
-    {
-      id: "NivMASS",
-      title: "NivMASS",
-      description: "Performance marketing & influencer funnels that scale revenue.",
-      image: "/Mass.jpg",
-    },
-    {
-      id: "NivITHUB",
-      title: "NivITHUB",
-      description: "Integrations, dashboards & ERP + AI workflows to automate ops.",
-      image: "/VRM.jpg",
-    },
-  ]
+ const solutions = [
+  {
+    id: "NivPAP",
+    title: "NivPAP",
+    description: "Production: packaging that converts.",
+    image: "/Pap.jpg",
+    link: "https://nivpap.com/", // 👈 add your route here
+  },
+  {
+    id: "NivMASS",
+    title: "NivMASS",
+    description: "Performance marketing & influencer funnels that scale revenue.",
+    image: "/Mass.jpg",
+    link: "https://nivmass.netlify.app/",
+  },
+  {
+    id: "NivITHUB",
+    title: "NivITHUB",
+    description: "Integrations, dashboards & ERP + AI workflows to automate ops.",
+    image: "/IT.jpg",
+    link: "https://nivit.netlify.app/",
+  },
+];
+
 
   const partners = [
     {
@@ -121,28 +125,28 @@ export default function HomePage() {
       id: "NivLojisticks",
       title: "NivLojisticks",
       description: "Hub-spoke network + API aggregator for fast delivery.",
-      image: "/IT.jpg",
+      image: "/VRM.jpg",
     },
   ]
 
   const support = [
     {
-      id: "crm",
-      title: "CRM",
-      description: "Customer Relationship Management - Advanced CRM solutions",
-      image: "/customer-relationship-management-crm.jpg",
+      id: "NivLegal",
+      title: "NivLegal",
+      description: "Company formation, GST & statutory filings (including EPR).",
+      image: "/support.jpg",
     },
     {
-      id: "admin",
-      title: "Admin",
-      description: "Administrative Services - Comprehensive administrative support",
-      image: "/administrative-services-management.jpg",
+      id: "Influx",
+      title: "Influx",
+      description: "Creator discovery, campaign management & payout automation.",
+      image: "/support1.webp",
     },
     {
-      id: "legal",
-      title: "Legal",
-      description: "Legal & Compliance - Expert legal guidance and compliance",
-      image: "/legal-compliance-services.jpg",
+      id: "NivOWL",
+      title: "NivOWL",
+      description: " SOPs, cohort training & operational playbooks for teams.",
+      image: "/support3.jpg",
     },
   ]
 
@@ -193,30 +197,36 @@ export default function HomePage() {
         </div>
       </div>
     </section>
-      <section id="solutions" ref={solutionsRef} className="py-16 px-4 md:px-12">
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Solutions</h2>
-        </div>
+ <section id="solutions" ref={solutionsRef} className="py-16 px-4 md:px-12">
+  <div className="mb-8">
+    <h2 className="text-3xl md:text-4xl font-bold text-white">Solutions</h2>
+  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {solutions.map((solution) => (
-            <Link key={solution.id} href={`/learn-more/${solution.id}`}>
-              <div className="solution-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
-                <img
-                  src={solution.image || "/placeholder.svg"}
-                  alt={solution.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">{solution.title}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed">{solution.description}</p>
-                </div>
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
-              </div>
-            </Link>
-          ))}
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {solutions.map((solution) => (
+      <a
+        key={solution.id}
+        href={solution.link} // 👈 external website link
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div className="solution-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+          <img
+            src={solution.image || "/placeholder.svg"}
+            alt={solution.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+            <h3 className="text-2xl font-bold text-white mb-2">{solution.title}</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">{solution.description}</p>
+          </div>
+          <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
         </div>
-      </section>
+      </a>
+    ))}
+  </div>
+</section>
+
 
       <section id="partners" ref={partnersRef} className="py-16 px-4 md:px-12">
         <div className="mb-8">
@@ -267,10 +277,9 @@ export default function HomePage() {
       <section className="py-20 px-4 md:px-12 bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Choose Your Perfect Package</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">NIV BRM Club</h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Transparent pricing with no hidden fees. Select the package that best fits your business needs.
-            </p>
+ Priority support, consolidated billing & Membership  discounts            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -278,7 +287,7 @@ export default function HomePage() {
             <div className="bg-[#1a1a1a] border-2 border-gray-800 rounded-2xl p-8 hover:shadow-xl hover:shadow-red-900/20 transition-all">
               <h3 className="text-2xl font-bold text-white mb-4">Starter</h3>
               <div className="mb-6">
-                <span className="text-5xl font-bold text-red-600">$999</span>
+                <span className="text-5xl font-bold text-red-600"> ₹1,080</span>
                 <span className="text-gray-400">/one-time</span>
               </div>
               <p className="text-gray-400 mb-8">Perfect for small businesses getting started online</p>
@@ -316,7 +325,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Professional</h3>
               <div className="mb-6">
-                <span className="text-5xl font-bold text-red-600">$2,499</span>
+                <span className="text-5xl font-bold text-red-600">₹10,800</span>
                 <span className="text-gray-400">/one-time</span>
               </div>
               <p className="text-gray-400 mb-8">Comprehensive solution for growing businesses</p>
@@ -353,7 +362,8 @@ export default function HomePage() {
             <div className="bg-[#1a1a1a] border-2 border-gray-800 rounded-2xl p-8 hover:shadow-xl hover:shadow-red-900/20 transition-all">
               <h3 className="text-2xl font-bold text-white mb-4">Enterprise</h3>
               <div className="mb-6">
-                <span className="text-5xl font-bold text-red-600">Custom</span>
+                <span className="text-5xl font-bold text-red-600">₹1,08,000</span>
+                <span className="text-gray-400">/one-time</span>
               </div>
               <p className="text-gray-400 mb-8">Tailored solutions for large organizations</p>
               <ul className="space-y-4 mb-8">
@@ -421,21 +431,24 @@ export default function HomePage() {
           </div>
 
           {/* Solutions */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Solutions</h4>
-            <ul className="space-y-3 text-gray-400">
-              {solutions?.map((solution: any) => (
-                <li key={solution.id}>
-                  <Link
-                    href={`/learn-more/${solution.id}`}
-                    className="hover:text-white transition-colors"
-                  >
-                    {solution.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div>
+  <h4 className="text-lg font-semibold text-white mb-4">Solutions</h4>
+  <ul className="space-y-3 text-gray-400">
+    {solutions?.map((solution) => (
+      <li key={solution.id}>
+        <Link
+          href={solution.link} // 👈 use direct link
+          className="hover:text-white transition-colors"
+          target="_blank" // optional: opens in new tab
+          rel="noopener noreferrer"
+        >
+          {solution.title}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
           {/* Partners */}
           <div>
