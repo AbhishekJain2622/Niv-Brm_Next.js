@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, Check } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image";
-
+import Image from "next/image"
+import { Layers, Handshake, TrendingUp } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger)
 
 export default function HomePage() {
@@ -83,30 +83,29 @@ export default function HomePage() {
     return () => ctx.revert()
   }, [])
 
- const solutions = [
-  {
-    id: "NivPAP",
-    title: "NivPAP",
-    description: "Production: packaging that converts.",
-    image: "/Pap.jpg",
-    link: "https://nivpap.com/", // 👈 add your route here
-  },
-  {
-    id: "NivMASS",
-    title: "NivMASS",
-    description: "Performance marketing & influencer funnels that scale revenue.",
-    image: "/Mass.jpg",
-    link: "https://nivmass.netlify.app/",
-  },
-  {
-    id: "NivITHUB",
-    title: "NivITHUB",
-    description: "Integrations, dashboards & ERP + AI workflows to automate ops.",
-    image: "/IT.jpg",
-    link: "https://nivit.netlify.app/",
-  },
-];
-
+  const solutions = [
+    {
+      id: "NivPAP",
+      title: "NivPAP",
+      description: "Production: packaging that converts.",
+      image: "/Pap.jpg",
+      link: "https://nivpap.com/",
+    },
+    {
+      id: "NivMASS",
+      title: "NivMASS",
+      description: "Performance marketing & influencer funnels that scale revenue.",
+      image: "/Mass.jpg",
+      link: "https://nivmass.netlify.app/",
+    },
+    {
+      id: "NivITHUB",
+      title: "NivITHUB",
+      description: "Integrations, dashboards & ERP + AI workflows to automate ops.",
+      image: "/IT.jpg",
+      link: "https://nivit.netlify.app/",
+    },
+  ]
 
   const partners = [
     {
@@ -150,134 +149,266 @@ export default function HomePage() {
     },
   ]
 
+  const businessSegments = [
+    {
+      id: "cake-bakery",
+      title: "Cake & Bakery",
+      description:
+        "Enhance your bakery creations with our premium packaging designed to preserve freshness and elevate presentation. From cakes to pastries, our solutions combine style, durability, and hygiene, ensuring your treats look as delightful as they taste while leaving a lasting impression on your customers.",
+      image: "https://nivpap.com/wp-content/uploads/2025/09/cake-and-bakery.png",
+    },
+    {
+      id: "restaurant-qsr",
+      title: "Restaurant & QSR",
+      description:
+        "Deliver excellence with packaging that matches your brand’s standard. From quick service to fine dining, our innovative solutions ensure convenience, hygiene, and sustainability. Designed for performance and presentation, our packaging helps hotels and QSRs serve food that stays fresh, travels well, and delights customers every time.",
+      image: "https://nivpap.com/wp-content/uploads/2025/09/QSR.webp",
+    },
+    {
+      id: "sweet-farshan",
+      title: "Sweet & Farshan",
+      description:
+        "Give your sweets the packaging they deserve. Our tailored solutions keep flavors intact while showcasing your products with elegance and care. Perfect for gifting or retail, our packaging adds value to your offerings, making every bite of tradition and taste a truly memorable experience for your customers.",
+      image: "https://nivpap.com/wp-content/uploads/2025/09/Sweet-shops.webp",
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       <header className="py-8 flex justify-center">
         <div ref={logoRef}>
-  <Image
-    src="/logo.png"        // ← your logo file (place it in /public)
-    alt="NIV BRM Logo"
-    width={150}            // adjust as needed
-    height={40}            // adjust as needed
-    priority               // improves loading performance
-    className="object-contain"
-  />
-</div>
+          <Image
+            src="/logo.png"
+            alt="NIV BRM Logo"
+            width={150}
+            height={40}
+            priority
+            className="object-contain"
+          />
+        </div>
       </header>
 
-    <section className="min-h-[60vh] flex flex-col items-center justify-center px-6">
-      <div className="hero-content w-full max-w-3xl text-center">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-8">
-          How can we help you today?
-        </h1>
+      <main>
+        {/* --- Hero Section --- */}
+        {/* <section className="min-h-[60vh] flex flex-col items-center justify-center px-6">
+            <div className="hero-content w-full max-w-3xl text-center">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-8">
+                How can we help you today?
+            </h1>
 
-        {/* Search Bar */}
-        <div className="relative">
-          <div className="flex items-center gap-3 bg-[#2f2f2f] rounded-full px-6 py-4 hover:bg-[#3f3f3f] transition-colors">
-            <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
-            <Input
-              type="text"
-              placeholder="Ask anything"
-              className="flex-1 bg-transparent border-none text-white placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
-            />
-          </div>
+            <div className="relative">
+                <div className="flex items-center gap-3 bg-[#2f2f2f] rounded-full px-6 py-4 hover:bg-[#3f3f3f] transition-colors">
+                <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                <Input
+                    type="text"
+                    placeholder="Ask anything"
+                    className="flex-1 bg-transparent border-none text-white placeholder:text-gray-400 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
+                />
+                </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                <button className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors">
+                Explore Solutions
+                </button>
+                <button className="px-6 py-3 bg-[#2f2f2f] text-white font-medium rounded-full hover:bg-[#3f3f3f] transition-colors border border-gray-700">
+                Start AI Assistant
+                </button>
+            </div>
+            </div>
+        </section> */}
+
+<section className="relative w-full h-[60vh] overflow-hidden">
+  {/* Background Image */}
+  <Image
+    src="/image.jpg" // 👈 Make sure this image is in your /public folder
+    alt="Hero Banner"
+    layout="fill"
+    objectFit="cover"
+    priority // Good for images in the hero section
+  />
+</section>
+        
+<section id="about-attractive" className="bg-black py-20 sm:py-24">
+  <div className="container mx-auto px-6 lg:px-8">
+    {/* Header */}
+    <div className="max-w-3xl mx-auto text-center">
+      <h2 className="text-base font-semibold text-red-500 uppercase tracking-wider">
+        Why NIV BRM?
+      </h2>
+      <p className="mt-2 text-3xl lg:text-4xl font-bold tracking-tight text-white sm:text-4xl text-balance">
+        An Integrated Approach to Business Growth
+      </p>
+      <p className="mt-6 text-lg leading-8 text-gray-400">
+        We don't just offer services; we build comprehensive systems designed to scale your business. Our approach is built on three core pillars.
+      </p>
+    </div>
+
+    {/* 3-Column Grid with Icons */}
+    <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+      {/* Pillar 1 */}
+      <div className="text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-600/10">
+          <Layers className="h-6 w-6 text-red-500" />
         </div>
-
-        {/* Buttons BELOW the search bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-          {/* Explore Solutions Button */}
-          <button className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors">
-            Explore Solutions
-          </button>
-
-          {/* Start AI Assistant Button */}
-          <button className="px-6 py-3 bg-[#2f2f2f] text-white font-medium rounded-full hover:bg-[#3f3f3f] transition-colors border border-gray-700">
-            Start AI Assistant
-          </button>
-        </div>
+        <h3 className="mt-5 text-xl font-semibold text-white">
+          Integrated Solutions
+        </h3>
+        <p className="mt-2 text-base text-gray-400">
+          From packaging to marketing and logistics, we combine services into one seamless system for your business.
+        </p>
       </div>
-    </section>
- <section id="solutions" ref={solutionsRef} className="py-16 px-4 md:px-12">
-  <div className="mb-8">
-    <h2 className="text-3xl md:text-4xl font-bold text-white">Solutions</h2>
-  </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {solutions.map((solution) => (
-      <a
-        key={solution.id}
-        href={solution.link} // 👈 external website link
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div className="solution-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
-          <img
-            src={solution.image || "/placeholder.svg"}
-            alt={solution.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-            <h3 className="text-2xl font-bold text-white mb-2">{solution.title}</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">{solution.description}</p>
-          </div>
-          <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
+      {/* Pillar 2 */}
+      <div className="text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-600/10">
+          <Handshake className="h-6 w-6 text-red-500" />
         </div>
-      </a>
-    ))}
+        <h3 className="mt-5 text-xl font-semibold text-white">
+          Strategic Partnerships
+        </h3>
+        <p className="mt-2 text-base text-gray-400">
+          We work as an extension of your team, deeply understanding your goals to provide proactive, tailored support.
+        </p>
+      </div>
+
+      {/* Pillar 3 */}
+      <div className="text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-600/10">
+          <TrendingUp className="h-6 w-6 text-red-500" />
+        </div>
+        <h3 className="mt-5 text-xl font-semibold text-white">
+          Accelerated Growth
+        </h3>
+        <p className="mt-2 text-base text-gray-400">
+          Our ultimate measure of success is yours. We focus on delivering tangible results that drive revenue and market share.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
-
-
-      <section id="partners" ref={partnersRef} className="py-16 px-4 md:px-12">
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Partners</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {partners.map((partner) => (
-            <Link key={partner.id} href={`/learn-more/${partner.id}`}>
-              <div className="partner-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
-                <img
-                  src={partner.image || "/placeholder.svg"}
-                  alt={partner.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">{partner.title}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed">{partner.description}</p>
+        {/* --- Solutions Section --- */}
+        <section id="solutions" ref={solutionsRef} className="py-16 px-4 md:px-12">
+            <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Solutions</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {solutions.map((solution) => (
+                <a
+                key={solution.id}
+                href={solution.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                <div className="solution-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+                    <img
+                    src={solution.image || "/placeholder.svg"}
+                    alt={solution.title}
+                    className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">{solution.title}</h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">{solution.description}</p>
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
                 </div>
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+                </a>
+            ))}
+            </div>
+        </section>
 
-      <section id="support" ref={supportRef} className="py-16 px-4 md:px-12">
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Support</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {support.map((item) => (
-            <Link key={item.id} href={`/learn-more/${item.id}`}>
-              <div className="support-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
-                <img src={item.image || "/placeholder.svg"} alt={item.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed">{item.description}</p>
+        {/* --- Partners Section --- */}
+        <section id="partners" ref={partnersRef} className="py-16 px-4 md:px-12">
+            <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Partners</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {partners.map((partner) => (
+                <Link key={partner.id} href={`/learn-more/${partner.id}`}>
+                <div className="partner-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+                    <img
+                    src={partner.image || "/placeholder.svg"}
+                    alt={partner.title}
+                    className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">{partner.title}</h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">{partner.description}</p>
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
                 </div>
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+                </Link>
+            ))}
+            </div>
+        </section>
 
-      <section className="py-20 px-4 md:px-12 bg-black">
+        {/* --- Support Section --- */}
+        <section id="support" ref={supportRef} className="py-16 px-4 md:px-12">
+            <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Support</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {support.map((item) => (
+                <Link key={item.id} href={`/learn-more/${item.id}`}>
+                <div className="support-card h-[300px] relative rounded-lg overflow-hidden group cursor-pointer">
+                    <img src={item.image || "/placeholder.svg"} alt={item.title} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
+                    <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-sm text-gray-300 leading-relaxed">{item.description}</p>
+                    </div>
+                    <div className="absolute bottom-0 left-0 w-0 h-1 bg-red-600 group-hover:w-full transition-all duration-300"></div>
+                </div>
+                </Link>
+            ))}
+            </div>
+        </section>
+
+        {/* --- Business Segments Section --- */}
+        <section id="business-segments" className="py-16 px-4 md:px-12 bg-[#0a0a0a] text-white">
+            <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold">Shop by Business Segment</h2>
+            <p className="text-gray-400 mt-3">
+                Tailored benefits for your industry, with exclusive member advantages
+            </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {businessSegments.map((item, index) => (
+                <Link
+                key={index}
+                href={`/learn-more/${item.id}`}
+                className="group bg-[#1a1a1a] rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-red-900/30 transition-all flex flex-col"
+                >
+                <div className="h-[280px] overflow-hidden">
+                    <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                </div>
+                <div className="p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                    <h3 className="text-2xl font-semibold mb-3 group-hover:text-red-500 transition-colors">
+                        {item.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                    </div>
+                    <div className="mt-6 px-5 py-2 text-sm text-center font-medium border border-gray-700 rounded-full group-hover:bg-red-600 group-hover:border-red-600 transition-colors">
+                    Explore
+                    </div>
+                </div>
+                </Link>
+            ))}
+            </div>
+        </section>
+
+        {/* --- Packages Section --- */}
+      
+  <section className="py-20 px-4 md:px-12 bg-black">
+
+
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">NIV BRM Club</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Packages</h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
  Priority support, consolidated billing & Membership  discounts            </p>
           </div>
@@ -409,6 +540,12 @@ export default function HomePage() {
         </div>
       </section>
 
+
+
+      </main>
+
+      {/* --- Footer --- */}
+      
        <footer className="py-16 border-t border-gray-800 bg-black">
       <div className="container mx-auto px-6">
         {/* Top Section */}
@@ -425,7 +562,7 @@ export default function HomePage() {
     className="object-contain"
   />
 </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed mt-4">
               Empowering businesses with intelligent solutions and trusted partnerships.
             </p>
           </div>
@@ -448,6 +585,7 @@ export default function HomePage() {
     ))}
   </ul>
 </div>
+
 
 
           {/* Partners */}
@@ -506,3 +644,8 @@ export default function HomePage() {
     </div>
   )
 }
+
+
+
+
+
