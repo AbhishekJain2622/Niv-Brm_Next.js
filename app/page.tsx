@@ -236,10 +236,10 @@ export default function HomePage() {
     priority // Good for images in the hero section
   />
 </section>
-        
+{/*         
 <section id="about-attractive" className="bg-black py-20 sm:py-24">
   <div className="container mx-auto px-6 lg:px-8">
-    {/* Header */}
+
     <div className="max-w-3xl mx-auto text-center">
       <h2 className="text-base font-semibold text-red-500 uppercase tracking-wider">
         Why NIV BRM?
@@ -252,9 +252,9 @@ export default function HomePage() {
       </p>
     </div>
 
-    {/* 3-Column Grid with Icons */}
+
     <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-      {/* Pillar 1 */}
+
       <div className="text-center">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-600/10">
           <Layers className="h-6 w-6 text-red-500" />
@@ -267,7 +267,7 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* Pillar 2 */}
+ 
       <div className="text-center">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-600/10">
           <Handshake className="h-6 w-6 text-red-500" />
@@ -280,7 +280,6 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* Pillar 3 */}
       <div className="text-center">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-600/10">
           <TrendingUp className="h-6 w-6 text-red-500" />
@@ -294,7 +293,7 @@ export default function HomePage() {
       </div>
     </div>
   </div>
-</section>
+</section> */}
         {/* --- Solutions Section --- */}
         <section id="solutions" ref={solutionsRef} className="py-16 px-4 md:px-12">
             <div className="mb-8">
