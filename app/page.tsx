@@ -526,12 +526,12 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button
+            {/* <Button
               variant="outline"
               className="border-2 border-gray-700 text-white hover:bg-red-600 hover:border-red-600 bg-transparent"
             >
               View All Packages
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>
