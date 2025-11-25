@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18" # Adjust this to match your project's Node version
+
+[dev]
+  command = "npm run dev"
+  port = 8888
+  
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
